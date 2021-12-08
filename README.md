@@ -8,4 +8,4 @@ https://github.com/vnen/godot-tiled-importer
 
 This project demonstrates:
 * tiles with collision
-* spawning scenes to replace objects specified in Tiled (e.g. key, door, player spawn position etc)
+* specifying a post import script to spawn scenes to replace objects specified in Tiled (e.g. key, door, player spawn position etc)
