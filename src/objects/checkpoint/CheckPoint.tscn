@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/objects/checkpoint/CheckPoint#1.png" type="Texture" id=1]
+[ext_resource path="res://src/objects/checkpoint/CheckPoint.gd" type="Script" id=2]
+[ext_resource path="res://src/objects/checkpoint/CheckPoint#2.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.7551, 26.8028 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "on",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "off",
+"speed": 5.0
+} ]
+
+[node name="CheckPoint" type="Area2D" groups=[
+"checkpoint",
+]]
+z_index = 1
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -27 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -27 )
+frames = SubResource( 2 )
+animation = "off"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

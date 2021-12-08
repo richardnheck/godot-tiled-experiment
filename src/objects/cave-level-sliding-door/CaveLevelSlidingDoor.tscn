@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/objects/cave-level-sliding-door/door.png" type="Texture" id=1]
+[ext_resource path="res://src/objects/cave-level-sliding-door/CaveLevelSlidingDoor.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MovingDoor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -50 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 48 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 40.5311, 47.0178 )
+
+[node name="CaveLevelSlidingDoor" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/open = SubResource( 1 )
+
+[node name="MovingDoor" type="StaticBody2D" parent="."]
+collision_layer = 8
+
+[node name="Sprite" type="Sprite" parent="MovingDoor"]
+position = Vector2( -8, -96 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingDoor"]
+position = Vector2( 0, -48 )
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="MovingDoor"]
+position = Vector2( -15.2207, -37.8027 )
+collision_layer = 2147483656
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingDoor/Area2D"]
+position = Vector2( -16.7793, -10 )
+shape = SubResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="MovingDoor/Area2D" to="." method="_on_Area2D_body_entered"]
