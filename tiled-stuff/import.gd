@@ -9,6 +9,7 @@ func post_import(imported_scene):
 	
 	for child in scene.get_children():
 		if child is TileMap:
+			print(child.name)
 			import_tilemap(child)
 		elif child is Node2D:
 			for object in child.get_children():
@@ -18,7 +19,12 @@ func post_import(imported_scene):
 	return scene
 
 func import_tilemap(tilemap):
-	pass
+	if tilemap.has_meta("group"):
+		
+		var group = tilemap.get_meta("group")
+		
+		tilemap.add_to_group(group, true)
+		print("in group ", tilemap.is_in_group(group))
 
 func spawn_object(object):
 	if object.has_meta("path"):

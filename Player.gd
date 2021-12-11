@@ -10,6 +10,7 @@ const GRAVITY = PlayerVariables.GRAVITY
 
 var is_dead = false
 
+signal collided
 signal player_died
 signal coin_collected
 
@@ -53,6 +54,11 @@ func _physics_process(delta):
 		velocity.y += GRAVITY
 		velocity = move_and_slide(velocity, Vector2.UP)
 		velocity.x = lerp(velocity.x, 0.1, 0.4);
+		
+		for i in get_slide_count():
+			var collision = get_slide_collision(i)
+			if collision:
+				self.emit_signal('collided', collision)
 		
 		# Handle coming in to contact with enemies
 		# NB: This doesn't work when not moving so I added an Area2D to detect instead

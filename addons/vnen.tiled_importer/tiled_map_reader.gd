@@ -454,7 +454,7 @@ func make_layer(layer, parent, root, data):
 						collision.polygon = points
 
 					collision.one_way_collision = object.type == "one-way"
-
+					
 					if "x" in object:
 						pos.x = float(object.x)
 					if "y" in object:
