@@ -13,14 +13,21 @@ _global_script_classes=[ {
 "class": "Checkpoint",
 "language": "GDScript",
 "path": "res://src/objects/checkpoint/CheckPoint.gd"
+}, {
+"base": "Node2D",
+"class": "FireBall",
+"language": "GDScript",
+"path": "res://FireSpinner/FireBall.gd"
 } ]
 _global_script_class_icons={
-"Checkpoint": ""
+"Checkpoint": "",
+"FireBall": ""
 }
 
 [application]
 
 config/name="Tiled Godot Experiment"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -262,7 +262,7 @@ func make_layer(layer, parent, root, data):
 			var count = 0
 			for tile_id in chunk_data:
 				var int_id = int(str(tile_id)) & 0xFFFFFFFF
-
+			
 				if int_id == 0:
 					count += 1
 					continue
@@ -276,7 +276,7 @@ func make_layer(layer, parent, root, data):
 				var cell_x = cell_offset.x + chunk.x + (count % int(chunk.width))
 				var cell_y = cell_offset.y + chunk.y + int(count / chunk.width)
 				tilemap.set_cell(cell_x, cell_y, gid, flipped_h, flipped_v, flipped_d)
-
+				
 				count += 1
 
 		if options.save_tiled_properties:
@@ -685,7 +685,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 		var tilecount = int(ts.tilecount)
 
 		var gid = firstgid
-
+		
 		var x = margin
 		var y = margin
 
@@ -719,8 +719,9 @@ func build_tileset_for_scene(tilesets, source_path, options):
 
 			if "tiles" in ts and rel_id in ts.tiles and "objectgroup" in ts.tiles[rel_id] \
 					and "objects" in ts.tiles[rel_id].objectgroup:
+				
 				for object in ts.tiles[rel_id].objectgroup.objects:
-
+					
 					var shape = shape_from_object(object)
 
 					if typeof(shape) != TYPE_OBJECT:
@@ -740,12 +741,16 @@ func build_tileset_for_scene(tilesets, source_path, options):
 						result.tile_set_light_occluder(gid, shape)
 						result.tile_set_occluder_offset(gid, offset)
 					else:
-						result.tile_add_shape(gid, shape, Transform2D(0, offset), object.type == "one-way")
+						var one_way = object.type == "one-way"
+						#print(object)
+						
+						result.tile_add_shape(gid, shape, Transform2D(0, offset), one_way)
 
 			if options.custom_properties and options.tile_metadata and "tileproperties" in ts \
 					and "tilepropertytypes" in ts and rel_id in ts.tileproperties and rel_id in ts.tilepropertytypes:
 				tile_meta[gid] = get_custom_properties(ts.tileproperties[rel_id], ts.tilepropertytypes[rel_id])
 			if options.save_tiled_properties and rel_id in ts.tiles:
+				
 				for property in whitelist_properties:
 					if property in ts.tiles[rel_id]:
 						if not gid in tile_meta: tile_meta[gid] = {}
@@ -880,7 +885,7 @@ func read_tileset_file(path):
 func shape_from_object(object):
 	var shape = ERR_INVALID_DATA
 	set_default_obj_params(object)
-
+	
 	if "polygon" in object or "polyline" in object:
 		var vertices = PoolVector2Array()
 
@@ -1031,7 +1036,7 @@ func set_custom_properties(object, tiled_object):
 # Useful for tile meta, which is not stored directly
 func get_custom_properties(properties, types):
 	var result = {}
-
+	print(properties)
 	for property in properties:
 		var value = null
 		if str(types[property]).to_lower() == "bool":

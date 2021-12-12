@@ -9,7 +9,6 @@ func post_import(imported_scene):
 	
 	for child in scene.get_children():
 		if child is TileMap:
-			print(child.name)
 			import_tilemap(child)
 		elif child is Node2D:
 			for object in child.get_children():
@@ -33,11 +32,18 @@ func spawn_object(object):
 		scene.add_child(node)
 		node.set_owner(scene)
 		node.position = object.position + Vector2(0,0)
-
+		
 		for meta in object.get_meta_list():
 			if meta in default_meta:
 				continue
+			print(object.get_meta(meta))
 			node.set(meta, object.get_meta(meta))
+			
+#		if object.name == "FireSpinner":
+#			print(object.get_meta_list())
+#			print(node)
+#			node.length = 4
+#			node.start_direction = 90
 	else:
 		object.get_parent().remove_child(object)
 		scene.add_child(object)

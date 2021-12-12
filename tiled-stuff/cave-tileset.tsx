@@ -113,9 +113,13 @@
   </objectgroup>
  </tile>
  <tile id="99" type="one-way">
+  <properties>
+   <property name="name" value="One Way Tile"/>
+   <property name="one_way" type="bool" value="true"/>
+  </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0">
-    <polygon points="0,0 16,0 16,7 0,7"/>
+    <polygon points="0,0 16,0 16,1 0,1"/>
    </object>
   </objectgroup>
  </tile>
@@ -128,6 +132,11 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="16" height="16"/>
   </objectgroup>
+ </tile>
+ <tile id="235">
+  <properties>
+   <property name="path" value=" res://src/objects/key/KamonKey.tscn"/>
+  </properties>
  </tile>
  <tile id="242">
   <objectgroup draworder="index" id="2">

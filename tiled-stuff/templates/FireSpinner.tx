@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../cave-tileset.tsx"/>
+ <object name="FireSpinner" type="fire-spinner" gid="239" width="16" height="16">
+  <properties>
+   <property name="length" type="int" value="4"/>
+   <property name="path" value="res://FireSpinner/FireBallSpinner.tscn"/>
+   <property name="rotation_style" type="int" value="0"/>
+   <property name="start_direction" type="int" value="90"/>
+   <property name="swing_degrees" type="int" value="45"/>
+  </properties>
+ </object>
+</template>
